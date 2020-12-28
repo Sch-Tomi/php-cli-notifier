@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "php": "^7.4"
+        "php": "^7.4",
+        "symfony/process": "^5.2"
     },
     "require-dev": {
         "pestphp/pest": "^0.3.8",
@@ -20,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "NunoMaduro\\SkeletonPhp\\": "src/"
+            "PCN\\": "src/"
         }
     },
     "autoload-dev": {
