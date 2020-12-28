@@ -2,9 +2,10 @@
 
 namespace PCN\Alarms;
 
+use PCN\Alarms\AlarmInterface;
 use PCN\Notification;
 
-abstract class Alarm
+abstract class Alarm implements AlarmInterface
 {
     protected $processor;
 

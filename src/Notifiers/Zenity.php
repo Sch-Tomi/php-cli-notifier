@@ -2,8 +2,12 @@
 
 namespace PCN\Notifiers;
 
+use PCN\Helpers\OsUtility;
 use PCN\Notification;
+
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+
 
 class Zenity extends NotifierBase
 {
@@ -27,5 +31,23 @@ class Zenity extends NotifierBase
         $baseParams['text'] = $baseParams['title'] . "\n\n" . $baseParams['message'];
 
         $this->processor->run(null, $baseParams);
+    }
+
+    public function isAvailable(): bool
+    {
+        if (OsUtility::isUnixLike()) {
+
+            $process = new Process(['zenity', '--version']);
+
+            try {
+                $process->mustRun();
+
+                return true;
+            } catch (ProcessFailedException $exception) {
+                return false;
+            }
+        }
+
+        return false;
     }
 }

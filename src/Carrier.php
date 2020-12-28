@@ -44,24 +44,35 @@ class Carrier
 
     private function selectNotifier(): void
     {
-        $this->selectedNotifier = $this->notifiers[1];
+        foreach ($this->notifiers as $notifier) {
+            if ($notifier->isAvailable()) {
+                $this->selectedNotifier = $notifier;
+                break;
+            }
+        }
     }
 
     private function selectAlarm(): void
     {
-        $this->selectedAlarm = $this->alarms[0];
+        foreach ($this->alarms as $alarm) {
+            if ($alarm->isAvailable()) {
+                $this->selectedAlarm = $alarm;
+                break;
+            }
+        }
     }
 
-    public function send(Notification $notification):void
+    public function send(Notification $notification): void
     {
         $this->selectedNotifier->show($notification);
 
-        if($this->selectedNotifier->canNotPlaySound()){
+        if ($this->selectedNotifier->canNotPlaySound()) {
             $this->selectedAlarm->play($notification);
         }
     }
 
-    public function create(array $config){
+    public function create(array $config)
+    {
         $this->send(new Notification($config));
     }
 }

@@ -2,9 +2,11 @@
 
 namespace PCN\Notifiers;
 
+use PCN\Helpers\OsUtility;
+
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
-use PCN\Notification;
 
 class NotifySend extends NotifierBase
 {
@@ -20,5 +22,21 @@ class NotifySend extends NotifierBase
                 'notify-send -u normal -i "$icon" "$title" "$message"'
             )
         );
+    }
+
+    public function isAvailable(): bool
+    {
+        if (OsUtility::isUnixLike()) {
+            $process = new Process(['notify-send', '--version']);
+
+            try {
+                $process->mustRun();
+
+                return true;
+            } catch (ProcessFailedException $exception) {
+                return false;
+            }
+        }
+        return false;
     }
 }
