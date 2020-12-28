@@ -1,0 +1,7 @@
+.idea/*
+.idea/codeStyleSettings.xml
+/vendor/
+.phpunit.result.cache
+.php_cs.cache
+*.swp
+*.swo
