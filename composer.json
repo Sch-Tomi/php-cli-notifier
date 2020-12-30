@@ -1,12 +1,12 @@
 {
-    "name": "nunomaduro/skeleton-php",
-    "description": "A skeleton repository for my packages",
-    "keywords": ["php", "skeleton", "package"],
-    "license": "MIT",
+    "name": "sch-tomi/php-cli-notifier",
+    "description": "A CLI notifier package",
+    "keywords": ["php", "cli", "notification", "alarm"],
+    "license": "BSD 3-Clause License",
     "authors": [
         {
-            "name": "Nuno Maduro",
-            "email": "enunomaduro@gmail.com"
+            "name": "Schronk Tamás",
+            "email": "sch.tom93@gmail.com"
         }
     ],
     "require": {
