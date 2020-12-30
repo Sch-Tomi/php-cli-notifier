@@ -12,6 +12,7 @@
   </a>
 
   <h3 align="center">PHP CLI Notifier</h3>
+  <h4 align="center"><strong>!!! UNDER DEVELOPMENT !!!</strong></h3>
 
   <p align="center">
     Small tool to show notification from your command line on your desktop
