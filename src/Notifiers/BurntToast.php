@@ -1,29 +1,33 @@
 <?php
 
-namespace PCN\Alarms;
+namespace PCN\Notifiers;
 
-use PCN\Alarms\Alarm;
 use PCN\Helpers\OsUtility;
 
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
-class PaPlay extends Alarm
+
+class BurntToast extends NotifierBase
 {
     protected $processor;
+    protected bool $canPlaySound;
+
 
     public function __construct()
     {
-        $this->processor = Process::fromShellCommandline(
-            'paplay "$sound"'
+        parent::__construct(
+            false,
+            Process::fromShellCommandline(
+                'powershell -command "New-BurntToastNotification -Silent -AppLogo "${:icon}" -Text \'"${:title}"\', \'"${:message}"\'"'
+            )
         );
     }
 
     public function isAvailable(): bool
     {
-        if (OsUtility::isUnixLike()) {
-            $process = new Process(['paplay', '--version']);
-
+        if (OsUtility::isWindows()) {
+            $process = new Process(['powershell', '-command' ,'"Get-Module -ListAvailable -Name BurntToast"']);
             try {
                 $process->mustRun();
 

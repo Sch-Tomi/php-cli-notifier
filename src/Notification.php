@@ -42,7 +42,7 @@ class Notification
     public function setIcon(string $icon): void
     {
         if (in_array($icon, ['info', 'warning', 'error', 'success'])) {
-            $this->icon = dirname(__FILE__) . '/assets/icons/' . $icon . '.png';
+            $this->icon = realpath(dirname(__FILE__) . '/assets/icons/' . $icon . '.png');
         } else {
             $this->icon = $icon;
         }
@@ -56,7 +56,7 @@ class Notification
     public function setSound(string $sound): void
     {
         if (in_array($sound, ['beep', 'error'])) {
-            $this->sound = dirname(__FILE__) . '/assets/sounds/' . $sound . '.wav';
+            $this->sound = realpath(dirname(__FILE__) . '/assets/sounds/' . $sound . '.wav');
         } else {
             $this->sound = $sound;
         }

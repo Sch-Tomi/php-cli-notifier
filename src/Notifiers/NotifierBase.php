@@ -3,6 +3,7 @@
 namespace PCN\Notifiers;
 
 use PCN\Notification;
+use Symfony\Component\Process\Process;
 
 abstract class NotifierBase implements NotifierInterface
 {
@@ -27,6 +28,12 @@ abstract class NotifierBase implements NotifierInterface
 
     public function show(Notification $notification): void
     {
-        $this->processor->run(null, $notification->toArray());
+        $this->processor->run(function ($type, $buffer) {
+            if (Process::ERR === $type) {
+                echo 'ERR > '.$buffer;
+            } else {
+                echo 'OUT > '.$buffer;
+            }
+        }, $notification->toArray());
     }
 }
